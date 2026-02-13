@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSOS } from './hooks/useSOS';
 import { Header } from './components/Header';
-import { SosForm } from './components/SosForm';
 import { MessageCard } from './components/MessageCard';
 import { Settings } from './components/Settings';
 import EmergencyDashboard from './components/EmergencyDashboard';
 import { fallDetector } from './ai/FallDetector';
-import { LayoutDashboard, Settings as SettingsIcon, MessageSquare, QrCode, Camera, Radio } from 'lucide-react';
+import { LayoutDashboard, Settings as SettingsIcon, MessageSquare } from 'lucide-react';
 
 function App() {
   const { messages, isOnline, sendSOS, sendTestMessage } = useSOS();
