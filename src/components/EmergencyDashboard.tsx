@@ -40,7 +40,7 @@ const EmergencyDashboard: React.FC<EmergencyDashboardProps> = ({
   const statusConfig = getStatusConfig();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col">
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col pb-24">
       {/* Top Section */}
       <div className="px-6 pt-6 pb-4 space-y-4">
         <div className="flex items-center justify-between">
