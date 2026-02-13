@@ -3,7 +3,7 @@ import type { IDBPDatabase } from 'idb';
 import type { SOSMessage } from '../types/sos';
 
 const DB_NAME = 'meshguard-db';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 export class OfflineStorage {
     private db: Promise<IDBPDatabase>;
@@ -16,6 +16,9 @@ export class OfflineStorage {
                 }
                 if (!db.objectStoreNames.contains('peers')) {
                     db.createObjectStore('peers', { keyPath: 'id' });
+                }
+                if (!db.objectStoreNames.contains('preferences')) {
+                    db.createObjectStore('preferences', { keyPath: 'key' });
                 }
             },
         });
@@ -53,6 +56,17 @@ export class OfflineStorage {
     async deleteMessage(id: string): Promise<void> {
         const db = await this.db;
         await db.delete('messages', id);
+    }
+
+    async savePreference(key: string, value: any): Promise<void> {
+        const db = await this.db;
+        await db.put('preferences', { key, value, timestamp: Date.now() });
+    }
+
+    async getPreference<T>(key: string): Promise<T | undefined> {
+        const db = await this.db;
+        const pref = await db.get('preferences', key);
+        return pref?.value as T | undefined;
     }
 }
 
